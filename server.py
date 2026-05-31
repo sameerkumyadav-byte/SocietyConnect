@@ -115,7 +115,6 @@ def send_email_otp(to_email, otp, purpose="verification"):
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = SECRET_KEY
-init_db()
 
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=False)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
@@ -395,6 +394,7 @@ def is_valid_phone(phone):
 # ═══════════════════════════════════════════
 #  PING
 # ═══════════════════════════════════════════
+init_db()
 @app.route("/api/ping", methods=["GET", "OPTIONS"])
 def ping():
     return jsonify({"status": "ok", "server": "SocietyConnect v2 ✅"}), 200
